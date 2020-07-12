@@ -2,7 +2,7 @@
 
 This is a minimal proyect where we use spring boot as framework to expose diferents endpoints and redis as database trying to simulate a real casino roulette. All services are exposed in **http://localhost:8080/** .
 
-## How to run 
+# How to run 
   - First you need to install the spring boot tool , you can find it at the official page **https://spring.io/tools**.
   - Then you need the redis server, you can download it here **https://github.com/MicrosoftArchive/redis/releases**.
   - Once you have all tools you just need to clone this repository, open it with the spring tool.
