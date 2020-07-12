@@ -1,6 +1,6 @@
 # Roulette proyect
 
-This is a minimal proyect where we use spring boot as framework to expose diferents endpoints and redis as database trying to simulate a real casino roulette. All services are exposed in **http://localhost:8080/** .
+This is a minimal proyect where we use spring boot as framework to expose differents endpoints and redis as database trying to simulate a real casino roulette. All services are exposed in **http://localhost:8080/** .
 
 # How to run 
   - First you need to install the spring boot tool , you can find it at the official page **https://spring.io/tools**.
