@@ -12,17 +12,13 @@ import com.example.demo.entitys.Roulette;
 public class RedisConfiguration {
 
 	@Bean
-	JedisConnectionFactory jedisConnectionFactory() {
-		
-	return new JedisConnectionFactory();		
-		
-	}
-	
+	JedisConnectionFactory jedisConnectionFactory() { return new JedisConnectionFactory(); }
+
 	@Bean
 	RedisTemplate<String, Roulette> redisTemplate(){
 		final RedisTemplate<String, Roulette> redis=new RedisTemplate<>();
 		redis.setConnectionFactory(jedisConnectionFactory());
+
 		return redis;
-		
 	}
 }

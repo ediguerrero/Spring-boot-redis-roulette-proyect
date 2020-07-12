@@ -9,5 +9,4 @@ public class RouletteApiRestApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(RouletteApiRestApplication.class, args);
 	}
-
 }
