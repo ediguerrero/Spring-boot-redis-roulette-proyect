@@ -1,20 +1,14 @@
 package com.example.demo.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.example.demo.proxy.MambuConnectionService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.example.demo.entitys.Bet;
 import com.example.demo.entitys.Roulette;
@@ -24,9 +18,10 @@ import com.example.demo.repository.RouletteRepository;
 @RequestMapping("/")
 public class RoulettesREST {
 	private RouletteRepository rouletteRepository;
-
-	public RoulettesREST(RouletteRepository rouletteRepository) {
+	private final MambuConnectionService mambuConnectionService;
+	public RoulettesREST(RouletteRepository rouletteRepository, MambuConnectionService mambuConnectionService) {
 		this.rouletteRepository = rouletteRepository;
+		this.mambuConnectionService = mambuConnectionService;
 	}
 
 	@GetMapping("/roulettes")
@@ -74,6 +69,29 @@ public class RoulettesREST {
 	}
 
 	@DeleteMapping("/roulettes/{id}")
-	public void deleteRoulette(@PathVariable String id) { rouletteRepository.delete(id);	}	
+	public void deleteRoulette(@PathVariable String id) { rouletteRepository.delete(id);	}
+
+
+
+
+	@GetMapping("/txs")
+	public Object getTransactionsByFilter(@RequestParam String startDate, @RequestParam String endDate,
+														  @RequestParam(required = false) String type
+														 ) throws IOException {
+		int i = 0;
+		List mambuTrasactions = new ArrayList<>();
+		while (i <= mambuTrasactions.size()) {
+			Object transactionsData = mambuConnectionService.getMambuTransactionsByFilter(startDate, endDate, type, new Integer(i), 1000,"GLOBAL_COLOMBIA");
+			mambuTrasactions.addAll(Arrays.asList(transactionsData));
+			i += 1000;
+		}
+		return mambuTrasactions;
+	}
+
+	@GetMapping("/instances")
+	public Object getTransactionsByFilter() throws IOException {
+		return this.mambuConnectionService.getAllInstances();
+	}
+
 
 }
